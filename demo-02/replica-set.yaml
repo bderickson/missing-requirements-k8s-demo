@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-first-replica-set
+  namespace: demo-02
+  labels:
+    awesome: definitely
+  annotations:
+    description: my first replica set!!!
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      awesome: hell_yeah
+  template:
+    metadata:
+      # This is metadata for the pods managed by this ReplicaSet
+      labels:
+        awesome: hell_yeah
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21.3
+        env:
+        - name: FOO
+          value: bar
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 200m
+            memory: 200Mi
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+
