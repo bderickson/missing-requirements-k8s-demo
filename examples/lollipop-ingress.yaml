@@ -1,0 +1,17 @@
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/affinity: cookie
+    ingress.kubernetes.io/backend-protocol: http
+    kubernetes.io/ingress.class: capacity-external-websocket
+  name: lollipop
+  namespace: default
+spec:
+  rules:
+  - host: concierge.capacity.com
+    http:
+      paths:
+      - backend:
+          serviceName: lollipop
+          servicePort: 80
+        path: /

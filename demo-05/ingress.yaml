@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-first-ingress
+  namespace: demo-05
+  labels:
+    awesome: boom
+  annotations:
+    description: my first ingress!!!
+spec:
+  rules:
+  - host: awesome.capacity.com
+    http:
+      paths:
+      - backend:
+          serviceName: my-awesome-service
+          servicePort: 80
+        path: /v1
+      - backend:
+          serviceName: my-newer-awesome-service
+          servicePort: 80
+        path: /v2
+
